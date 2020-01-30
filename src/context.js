@@ -4,10 +4,11 @@ import items from './data';
 const DestinationContext = React.createContext();
 
 const DestinationProvider = ({ children }) => {
-  const [destinations] = useState([]);
+  const [destinations, setDestinations] = useState([]);
   const [sortedDestinations, setSortedDestinations] = useState([]);
   const [featuredDestinations, setFeturedDestinations] = useState([]);
   const [loading, setLoading] = useState(true); // vrvtno ce dolaziti sa data
+  const [singleDestination, setSingleDestination] = useState({});
 
   //getData & frormat data
   useEffect(() => {
@@ -16,6 +17,7 @@ const DestinationProvider = ({ children }) => {
     let featuredDestinations = destinations.filter(
       item => item.featured === true
     );
+    setDestinations(destinations);
     setFeturedDestinations(featuredDestinations);
     setSortedDestinations(destinations);
     setLoading(false);
@@ -31,12 +33,20 @@ const DestinationProvider = ({ children }) => {
     });
     return tempItems;
   };
+  //Get one destination by slug
+  const getDestination = slug => {
+    let tempDestinations = [...destinations];
+    const destination = tempDestinations.find(item => item.slug === slug);
+
+    return destination;
+  };
   return (
     <DestinationContext.Provider
       value={{
         destinations: [...destinations],
         featuredDestinations: [...featuredDestinations],
         sortedDestinations: [...sortedDestinations],
+        getDestination,
         loading
       }}
     >

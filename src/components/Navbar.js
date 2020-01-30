@@ -6,7 +6,7 @@ import { FaAlignJustify } from 'react-icons/fa';
 export const navLinks = [
   <Link to='/'>Home</Link>,
 
-  <Link to='/about'>About Us</Link>,
+  <Link to='/about'>About</Link>,
   <Link to='/destinations'>Destinations</Link>
 ];
 
@@ -27,7 +27,10 @@ const Navbar = () => {
             <FaAlignJustify className='nav-icon' />
           </button>
         </div>
-        <ul className={isOpen ? 'nav-links show-nav' : 'nav-links'}>
+        <ul
+          onClick={() => setIsOpen(false)}
+          className={isOpen ? 'nav-links show-nav' : 'nav-links'}
+        >
           {navLinks.map((link, i) => (
             <li key={i}>{link}</li>
           ))}
