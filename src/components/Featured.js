@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { DestinationContext } from '../context';
 import { Loading } from './Loading';
-import Destination from './Destination';
+import Destination from './SmallDestination';
 import Title from './Title';
 
 const Featured = () => {
