@@ -21,6 +21,7 @@ export default class DestinationProvider extends Component {
   };
   componentDidMount() {
     let destinations = this.formatData(items);
+
     // set featured rooms
     let featuredDestinations = destinations.filter(
       item => item.featured === true
@@ -51,25 +52,62 @@ export default class DestinationProvider extends Component {
   };
   //Get one destination by slug
   getDestination = slug => {
-    let tempDestinations = [...this.destinations];
+    let tempDestinations = [...this.state.destinations];
     const destination = tempDestinations.find(item => item.slug === slug);
 
     return destination;
   };
   //form input change handler
   handleChange = event => {
-    const type = event.target.type;
-    const name = event.target.name;
-    const value = event.target.value;
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    console.log(target, value, name);
+    this.setState(
+      {
+        [name]: value
+      },
+      this.filterDestinations
+    );
   };
-
   filterDestinations = () => {
-    console.log('filter destinations func');
+    let {
+      destinations,
+      region,
+      party,
+      minSize,
+      maxSize,
+      minPrice,
+      maxPrice,
+      price,
+      radius,
+      pets,
+      food
+    } = this.state;
+
+    let tempDestinations = [...destinations];
+    if (region !== 'all') {
+      tempDestinations = tempDestinations.filter(
+        item => item.region === region
+      );
+      this.setState({
+        sortedDestinations: tempDestinations
+      });
+    }
+  };
+  handleRace = () => {
+    console.log(this.state);
   };
   render() {
+    console.log(this.state);
     return (
       <DestinationContext.Provider
-        value={{ ...this.state, getDestination: this.getDestination }}
+        value={{
+          ...this.state,
+          getDestination: this.getDestination,
+          handleChange: this.handleChange,
+          handleRace: this.handleRace
+        }}
       >
         {this.props.children}
       </DestinationContext.Provider>

@@ -3,9 +3,9 @@ import Hero from '../components/Hero';
 import Banner from '../components/Banner';
 import { Link } from 'react-router-dom';
 import Services from '../components/Services';
-import { Tuwya } from '../components/Tuwya';
 
 import Featured from '../components/Featured';
+import SelectRace from '../components/SelectRace';
 
 const Home = () => {
   return (
@@ -18,9 +18,11 @@ const Home = () => {
           </Link>
         </Banner>
       </Hero>
-      <Tuwya />
+
       <Services />
       <Featured />
+      <SelectRace />
+
       <p>TESTIMONIALS SLIDER</p>
     </>
   );

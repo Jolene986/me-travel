@@ -8,6 +8,7 @@ import Destination from './pages/Destination';
 import Error from './pages/Error';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
 /*
 //logic for homeworld discaunt..QQ
 const original = [
@@ -15,8 +16,7 @@ const original = [
   { neme: 'Bole', price: '500' },
   { name: 'Lole', price: '500' }
 ];
-
-const izmenjeni = [...original, { name: 'Gole', price: '500' }];
+{ name: 'Gole', price: '500' }];
 const novi = izmenjeni.map(item => {
   if (item.name === 'Jole') {
     console.log('vidi if');

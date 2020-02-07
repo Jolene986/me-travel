@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import DestinationFilter from './DestinationFilter';
 import DestinationList from './DestinationList';
 import { DestinationContext } from '../context';
-import { Loading } from './Loading';
+import { Loader } from './Loading';
+import gif from '../images/gif/stars-loader.gif';
 
 const DestinationContainer = () => {
   const { destinations, sortedDestinations, loading } = useContext(
@@ -10,7 +11,7 @@ const DestinationContainer = () => {
   );
 
   if (loading) {
-    return <Loading />;
+    return <Loader src={gif} />;
   }
   return (
     <>

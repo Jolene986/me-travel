@@ -1,9 +1,9 @@
 import React from 'react';
-import loader from '../images/gif/stars-loader.gif';
-export const Loading = () => {
+
+export const Loader = ({ src }) => {
   return (
     <div className='loading'>
-      <img src={loader} alt='loader-stars' />
+      <img src={src} alt='loader-stars' />
     </div>
   );
 };

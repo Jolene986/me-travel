@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import SmallDestination from './SmallDestination';
+
 const DestinationList = ({ destinations }) => {
   if (destinations.lenght === 0) {
     return (
