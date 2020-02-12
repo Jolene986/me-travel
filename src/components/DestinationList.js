@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import SmallDestination from './SmallDestination';
+import { DestinationContext } from '../context';
 
-const DestinationList = ({ destinations }) => {
-  if (destinations.lenght === 0) {
+
+const DestinationList = () => {
+  const {sortedDestinations}=useContext(DestinationContext)
+  if (sortedDestinations.length === 0) {
     return (
       <div className='empty-search'>
-        <h3>Unfortunately there is no rooms mached your search</h3>
+        <h3>Unfortunately no destinations mached your search</h3>
       </div>
     );
   }
@@ -13,7 +16,7 @@ const DestinationList = ({ destinations }) => {
   return (
     <section className='destinationlist'>
       <div className='destinationlist-center'>
-        {destinations.map(item => (
+        {sortedDestinations.map(item => (
           <SmallDestination key={item.id} destination={item} />
         ))}
       </div>

@@ -7,36 +7,63 @@ import salarian from '../images/salarian.jpg';
 import turian from '../images/turian.jpg';
 import krogan from '../images/Krogan.png';
 
+
 const SelectRace = () => {
-  //const [raceHomeworld, setRaceHomeworld] = useState('human');
+  
   const [showPopup, setShowPopup] = useState(false);
-  const { handleRace } = useContext(DestinationContext);
+  const [race, setRace] = useState('');
+  const [showSelf, setShowSelf]=useState(true)
+
+  const {handleRace} = useContext(DestinationContext)
 
   useEffect(() => {
-    //popup desapears after 10 seconds
-    let popupTimer = setTimeout(() => setShowPopup(false), 10000);
+    //popup  desapears after 10 seconds
+    let popupTimer = setTimeout(() => {setShowPopup(false)
+   }, 6000);
     //clears timeout on unmount
     return () => {
+      console.log('unmount')
       clearTimeout(popupTimer);
     };
   }, [showPopup]);
+  
 
-  //image klick handler, sets race and colors the border of selected image
+  //image click handler, sets race and colors the border of selected image
   const imgClickHandler = e => {
-    document.querySelectorAll('.raceImages-center> img').forEach(item => {
+    document.querySelectorAll('.raceImages-center > img').forEach(item => {
       item.style.border = '5px solid transparent';
     });
     e.target.style.borderColor = 'var(--primaryColor)';
+    setRace(e.target.id);
   };
 
-  const buttonHandler = () => {
+  const buttonHandler = e => {
+    //SelectRace component  desapears after 10 seconds
+   setTimeout(() => {setShowSelf(false)
+    }, 6000);
+     
+    
+    
     //setshow discount popup
     setShowPopup(true);
+    // function thaht sets new destinations state
+    handleRace(race);
+   
   };
   // conditional rendering of discount popup component if user selects race
   let popup = null;
   if (showPopup) {
-    popup = <DiscountPopup name={'Thessiaaa'} />;
+    popup = (  <DiscountPopup name={race} clicked={()=> setShowPopup(false)} /> )
+  }
+  if(showSelf=== false){
+    return null;
+  }
+  //disable select button if no race is selected
+  let bool = null;
+  if(race === ''){
+    bool = true
+  }else {
+    bool = false
   }
   return (
     <>
@@ -47,7 +74,7 @@ const SelectRace = () => {
           <img
             src={salarian}
             alt='salarian'
-            id='Surkesh'
+            id="Sur'Kesh"
             onClick={imgClickHandler}
           />
           <img
@@ -63,15 +90,11 @@ const SelectRace = () => {
             onClick={imgClickHandler}
           />
         </div>
-        <button
-          className='btn-primary'
-          onClick={() => {
-            handleRace();
-          }}
-        >
+        <button disabled={bool} className='btn-primary' onClick={buttonHandler}>
           select
         </button>
-      </section>
+        </section>
+      
 
       {popup}
     </>

@@ -71,6 +71,18 @@ h6 {
   font-weight: bold;
   margin-bottom: 1.5em;
 }
+button:disabled, button:disabled:hover {
+  display: inline-block;
+  text-decoration: none;
+  letter-spacing: var(--mainSpacing);
+  color: var(--mainBlack);
+  background: transparent;
+  padding: 0.4rem 0.9rem;
+  border: 3px solid var(--darkGrey);
+  transition: var(--mainTransition);
+  text-transform: uppercase;
+  cursor: pointer;
+}
 
 .btn-primary {
   display: inline-block;
@@ -309,9 +321,18 @@ h6 {
 /*end of services */
 /* featured destination and select race */
 
-.featured-destinations,
+.featured-destinations{
+  padding: 5rem 0;
+}
 .raceImages {
   padding: 5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.raceImages button {
+  margin-top: 2em;
 }
 .featured-destinations-center {
   width: 80vw;
@@ -333,6 +354,8 @@ h6 {
   width: 250px;
   height: 250px;
   cursor: pointer;
+  border: 5px solid transparent;
+  border-radius:4px;
 }
 @media screen and (min-width: 776px) {
   .featured-destination-center,
@@ -560,6 +583,36 @@ h6 {
   background: transparent;
   font-size: 1rem;
 }
+.price {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  background:var(--primaryColor);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.price:hover {
+  opacity: 1;
+}
+
+.price::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: var(--red);
+  cursor: pointer;
+}
+
+.price::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: var(--red);
+  cursor: pointer;
+}
 .size-inputs {
   display: flex;
 }
@@ -589,7 +642,7 @@ h6 {
 /* end of destination fitler*/
 /*Footer*/
 footer {
-  margin-top: 2rem;
+  /* margin-top: 2rem;*/
 }
 .footer-distributed {
   background: var(--primaryColor);
@@ -835,37 +888,93 @@ footer {
 
 /*end of footer*/
 /*Select Race popup*/
-.selectRace {
-  position: absolute;
-  top: 25%;
-  left: 25%;
+.discount {
+  position: fixed;
+  z-index: 500;
+  background-color:var(--mainGrey);
+  width: 70%;
+  height: 70%;
+  border: 8px solid var(--primaryColor);
+  border-radius:2px;
+  box-shadow: 1px 1px 1px var(--darkGrey);
+  padding: 6px;
+  left: 15%;
+  top: 15%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  -webkit-animation-name: zoomIn;
+  -webkit-animation-duration: 0.8s;
+  animation-name: zoomIn;
+  animation-duration: 0.8s;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+@-webkit-keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+50% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+ 50% {
+    opacity: 1;
+  }
+}
+.discount h1 {
+  text-transform: uppercase;
+  color: var(--red)
+}
+.discount p {
+  font-size: 1.5em;
+
+}
+.discount span {
+  color: var(--red);
+  font-size: 2.2em;
+ }
+ .discount h3 {
+  color: var(--red);
+  font-size: 2.2em;
+ }
+ .discount-icon {
+  color: var(--primaryColor);
+  font-size: 25px;
+  width: 38px;
+  height: 38px;
 
   text-align: center;
-  width: 60%;
-  height: 60%;
-  min-height: 60vh;
-  -webkit-clip-path: polygon(
-    20% 0%,
-    80% 0%,
-    100% 20%,
-    100% 80%,
-    80% 100%,
-    20% 100%,
-    0% 80%,
-    0% 20%
-  );
-  clip-path: polygon(
-    20% 0%,
-    80% 0%,
-    100% 20%,
-    100% 80%,
-    80% 100%,
-    20% 100%,
-    0% 80%,
-    0% 20%
-  );
-  background: var(--primaryColor);
-}
+  line-height: 42px;
+  margin: 10px 15px;
+  vertical-align: middle;
+ }
+ @media screen and (max-width: 576px) {
+   .discount {
+     width: 100%;
+     left:0%;
+   }
+  .discount h1, .discount h3{
+    font-size: 1.5em;
+  } 
+  .discount span {
+    font-size: 1.2em;
+  }
+  .discount p{
+font-size: 1em;
+  }
+ }
+
 /*End Race popup*/
 /*Media Queries*/
 @media screen and (max-width: 576px) {

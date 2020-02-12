@@ -735,7 +735,7 @@ export default [
       region: 'Terminus Systems',
       price: 6000,
       radius: 6021,
-      party: 10,
+      party: 6,
       pets: true,
       food: true,
       featured: true,

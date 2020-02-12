@@ -77,7 +77,7 @@ const Footer = () => {
           <a
             target='_blank'
             rel='noopener noreferrer'
-            href='https://www.linkedin.com/in/jovana-jovanovi%C4%87-jolene986/'
+            href='https://www.linkedin.com/in/jovana-jovanovic-dev/'
           >
             <FaLinkedin className='footer-icon' />
           </a>

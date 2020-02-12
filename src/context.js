@@ -62,7 +62,7 @@ export default class DestinationProvider extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    console.log(target, value, name);
+  
     this.setState(
       {
         [name]: value
@@ -77,29 +77,63 @@ export default class DestinationProvider extends Component {
       party,
       minSize,
       maxSize,
-      minPrice,
-      maxPrice,
       price,
-      radius,
       pets,
       food
     } = this.state;
-
+    // all destinations
     let tempDestinations = [...destinations];
+    //transform party value, price from string back to number
+    party = parseInt(party);
+    price = parseInt(price);
+    //FILTER BY REGION
     if (region !== 'all') {
       tempDestinations = tempDestinations.filter(
         item => item.region === region
       );
-      this.setState({
-        sortedDestinations: tempDestinations
-      });
+     }
+    //FILTER BY NUMBER OF PARTY MEMBERS
+    if (party !== 1) {
+      tempDestinations = tempDestinations.filter(item => item.party === party);
+      }
+    //FILTER BY PRICE
+    tempDestinations = tempDestinations.filter(item => item.price <= price);
+    //FILTER BY SIZE
+    tempDestinations = tempDestinations.filter(item => item.radius >= minSize && item.radius <= maxSize)
+
+    //FILTER BY FOOD
+    if(food){
+      tempDestinations = tempDestinations.filter(item => item.food === true);
     }
+    //FILTER BY PETS
+    if(pets){
+      tempDestinations = tempDestinations.filter(item => item.pets === true);
+    }
+
+//UPDATE STATE
+this.setState({
+  sortedDestinations:tempDestinations
+})
+
   };
-  handleRace = () => {
-    console.log(this.state);
+
+  handleRace = (value) => {
+    const newDestinations = [...this.state.destinations].map(item => {
+      if (item.name === value) {
+        //20% discount for selected race
+        item = { ...item, price: item.price - (item.price*0.2) };
+      }
+      return item;
+    });
+    let featuredDestinations = newDestinations.filter(
+      item => item.featured === true
+    );
+    //set new destinations with new price 
+    this.setState({destinations:newDestinations,sortedDestinations : newDestinations,featuredDestinations})
+   
   };
   render() {
-    console.log(this.state);
+    
     return (
       <DestinationContext.Provider
         value={{

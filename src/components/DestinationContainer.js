@@ -15,8 +15,8 @@ const DestinationContainer = () => {
   }
   return (
     <>
-      <DestinationFilter destinations={destinations} />
-      <DestinationList destinations={sortedDestinations} />
+      <DestinationFilter  />
+      <DestinationList  />
     </>
   );
 };
