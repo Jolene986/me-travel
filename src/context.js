@@ -28,7 +28,7 @@ export default class DestinationProvider extends Component {
   //get Data from Contentful
   getData = async () => {
     try {
-      let response = await Client.getEntries({ content_type: 'destinations' });
+      let response = await Client.getEntries({ content_type: 'destinations', order: "sys.createdAt" });
       let destinations = this.formatData(response.items);
 
       // set featured rooms
