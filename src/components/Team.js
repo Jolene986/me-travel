@@ -1,37 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Title from './Title';
-import tali from '../images/tali.png';
-import garrus from '../images/garrus.png';
-import liara from '../images/liara.png';
-import legion from '../images/legion.png';
+
+import useGetEntries from '../useGetEntries';
+
+//format data
+const formatData = content => {
+  let tempContent = content.map(item => {
+    let name = item.fields.name;
+    let quote = item.fields.quote;
+    let image = item.fields.image.fields.file.url;
+    let contentTeam = { ...item.fields, name, quote, image };
+    return contentTeam;
+  });
+  
+  return tempContent;
+};
+
 export const Team = () => {
-  const services = [
-    {
-      image: garrus,
-      title: 'Garrus Vakarian',
-      info: " Can it wait for a bit? I'm in the middle of some calibrations..."
-    },
-    {
-      image: liara,
-      title: "Dr Liara T'Soni",
-      info: " I'm not telling you if my hair tentacles move!"
-    },
-    {
-      image: tali,
-      title: " Tali'Zorah  ",
-      info: ' Quarian tech.. Emergency... Induction... Port!'
-    },
-    {
-      image: legion,
-      title: 'Legion',
-      info: ' Geth do not use windows. Structural weaknesses.'
-    }
-  ];
+  const [content, setContent] = useState('');
+  //get and format data from Contentful
+  useGetEntries('teamMembers', setContent, formatData);
+
+  if (content === '') {
+    return 'loading...';
+  }
+
   return (
     <section className='services'>
       <Title title='Our Team' />
       <div className='services-center'>
-        {services.map((item, index) => {
+        {content.map((item, index) => {
           return (
             <article key={index} className='service'>
               <img
@@ -40,8 +38,8 @@ export const Team = () => {
                 with='250'
                 height='250'
               />
-              <h6>{item.title}</h6>
-              <p>{item.info}</p>
+              <h6>{item.name}</h6>
+              <p>{item.quote}</p>
             </article>
           );
         })}

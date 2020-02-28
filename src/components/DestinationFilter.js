@@ -88,14 +88,13 @@ const DestinationFilter = () => {
              <input type="checkbox" name="food" id="food" checked={food} onChange={handleChange}/>
              <label htmlFor="food">Tradicional food</label>
            </div>
-         </div>
-         {/* checkbox pets */}
-         <div className="form-group">
            <div className="single-extra">
              <input type="checkbox" name="pets" id="pets" checked={pets} onChange={handleChange}/>
              <label htmlFor="food">Pets</label>
            </div>
          </div>
+         {/* checkbox pets */}
+       
       </form>
     </section>
   );

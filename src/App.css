@@ -559,6 +559,9 @@ button:disabled, button:disabled:hover {
 }
 /* end of destinationlist */
 /*  destination fitler*/
+form {
+  font-family: 'Orbitron', Verdana, sans-serif;
+}
 .filter-container {
   padding: 5rem 0;
 }
@@ -582,6 +585,7 @@ button:disabled, button:disabled:hover {
   width: 100%;
   background: transparent;
   font-size: 1rem;
+  font-family: 'Orbitron', Verdana, sans-serif;
 }
 .price {
   -webkit-appearance: none;
@@ -615,6 +619,19 @@ button:disabled, button:disabled:hover {
 }
 .size-inputs {
   display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+
+  
+}
+.size-inputs input {
+  margin:3px 0;
+  font-family: Orbitron, Verdana, sans-serif;
+  background-color:#135f85;
+  color: white;
+  opacity: 0.7;
+  padding: 5px 10px;
+
 }
 .size-input {
   width: 40%;
@@ -640,10 +657,34 @@ button:disabled, button:disabled:hover {
   }
 }
 /* end of destination fitler*/
-/*Footer*/
-footer {
-  /* margin-top: 2rem;*/
+/*Slider*/
+.slider {
+  width: 80%;
+  margin:0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
+.slider img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  padding: 10px;
+}
+.slider p {
+  padding: 10px;
+}
+.sliderArrow {
+  color: var(--primaryColor);
+  font-size: 50px;
+  }
+.sliderArrow:hover {
+  cursor: pointer;
+  color: var(--red)
+}
+/*Footer*/
+
 .footer-distributed {
   background: var(--primaryColor);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);

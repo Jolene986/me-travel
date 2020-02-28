@@ -6,6 +6,7 @@ import Services from '../components/Services';
 
 import Featured from '../components/Featured';
 import SelectRace from '../components/SelectRace';
+import Testimonials from '../components/Testimonials';
 
 const Home = () => {
   return (
@@ -22,8 +23,8 @@ const Home = () => {
       <Services />
       <Featured />
       <SelectRace />
-
-      <p>TESTIMONIALS SLIDER</p>
+<Testimonials/>
+      
     </>
   );
 };

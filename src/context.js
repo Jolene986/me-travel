@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import items from './data';
+
+import Client from './Contentful';
+
 
 const DestinationContext = React.createContext();
 
@@ -20,25 +22,35 @@ export default class DestinationProvider extends Component {
     pets: false
   };
   componentDidMount() {
-    let destinations = this.formatData(items);
-
-    // set featured rooms
-    let featuredDestinations = destinations.filter(
-      item => item.featured === true
-    );
-    //finding max price and max size from our data
-    let maxPrice = Math.max(...destinations.map(item => item.price));
-    let maxSize = Math.max(...destinations.map(item => item.radius));
-    this.setState({
-      destinations,
-      featuredDestinations,
-      sortedDestinations: destinations,
-      loading: false,
-      price: maxPrice,
-      maxPrice,
-      maxSize
-    });
+    // get and format data and set state
+    this.getData();
   }
+  //get Data from Contentful
+  getData = async () => {
+    try {
+      let response = await Client.getEntries({ content_type: 'destinations' });
+      let destinations = this.formatData(response.items);
+
+      // set featured rooms
+      let featuredDestinations = destinations.filter(
+        item => item.featured === true
+      );
+      //finding max price and max size from our data
+      let maxPrice = Math.max(...destinations.map(item => item.price));
+      let maxSize = Math.max(...destinations.map(item => item.radius));
+      this.setState({
+        destinations,
+        featuredDestinations,
+        sortedDestinations: destinations,
+        loading: false,
+        price: maxPrice,
+        maxPrice,
+        maxSize
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // format Data
   formatData = items => {
@@ -62,7 +74,7 @@ export default class DestinationProvider extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-  
+
     this.setState(
       {
         [name]: value
@@ -91,49 +103,52 @@ export default class DestinationProvider extends Component {
       tempDestinations = tempDestinations.filter(
         item => item.region === region
       );
-     }
+    }
     //FILTER BY NUMBER OF PARTY MEMBERS
     if (party !== 1) {
       tempDestinations = tempDestinations.filter(item => item.party === party);
-      }
+    }
     //FILTER BY PRICE
     tempDestinations = tempDestinations.filter(item => item.price <= price);
     //FILTER BY SIZE
-    tempDestinations = tempDestinations.filter(item => item.radius >= minSize && item.radius <= maxSize)
+    tempDestinations = tempDestinations.filter(
+      item => item.radius >= minSize && item.radius <= maxSize
+    );
 
     //FILTER BY FOOD
-    if(food){
+    if (food) {
       tempDestinations = tempDestinations.filter(item => item.food === true);
     }
     //FILTER BY PETS
-    if(pets){
+    if (pets) {
       tempDestinations = tempDestinations.filter(item => item.pets === true);
     }
 
-//UPDATE STATE
-this.setState({
-  sortedDestinations:tempDestinations
-})
-
+    //UPDATE STATE
+    this.setState({
+      sortedDestinations: tempDestinations
+    });
   };
 
-  handleRace = (value) => {
+  handleRace = value => {
     const newDestinations = [...this.state.destinations].map(item => {
       if (item.name === value) {
         //20% discount for selected race
-        item = { ...item, price: item.price - (item.price*0.2) };
+        item = { ...item, price: item.price * 0.8 };
       }
       return item;
     });
     let featuredDestinations = newDestinations.filter(
       item => item.featured === true
     );
-    //set new destinations with new price 
-    this.setState({destinations:newDestinations,sortedDestinations : newDestinations,featuredDestinations})
-   
+    //set new destinations with new price
+    this.setState({
+      destinations: newDestinations,
+      sortedDestinations: newDestinations,
+      featuredDestinations
+    });
   };
   render() {
-    
     return (
       <DestinationContext.Provider
         value={{
