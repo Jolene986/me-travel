@@ -445,13 +445,15 @@ button:disabled, button:disabled:hover {
   width: 80vw;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 30px;
   grid-row-gap: 2rem;
   grid-column-gap: 50px;
 }
 .single-destination-images img {
   width: 100%;
-  height: 200px;
+  
   display: block;
 }
 .single-destination-info {
@@ -491,13 +493,16 @@ button:disabled, button:disabled:hover {
 .extras {
   list-style-type: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 30px;
   grid-column-gap: 2rem;
   grid-row-gap: 0.5rem;
 }
 .advice {
   width: 100%;
   text-align: center;
+  margin-bottom: 2em;
 }
 .advice div {
   width: 50%;
@@ -519,10 +524,9 @@ button:disabled, button:disabled:hover {
     width: 95vw;
     max-width: 1170px;
   }
-  .single-destination-images img {
-    width: 250px;
-  }
-  .single-destination-info {
+  
+  .single-destination-info
+   {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 2rem;
@@ -531,6 +535,8 @@ button:disabled, button:disabled:hover {
     padding-left: 3rem;
   }
 }
+
+ 
 
 /* end of single destination*/
 /* destinationlist */
