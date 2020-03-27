@@ -19,7 +19,7 @@ const Featured = () => {
           destinations.map(item => {
             return <Destination key={item.id} destination={item} />;
           })
-          /**ne znam dal ce nam trebati destination prop al vrvtno hoce goddamet */
+          
         )}
       </div>
     </section>
